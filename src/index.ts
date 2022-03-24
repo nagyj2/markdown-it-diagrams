@@ -58,7 +58,7 @@ export async function loadPluginFactory() {
                         imageAttrs.push(["role", 'img']); // Tag element as an image for screen readers
                         imageAttrs.push(["aria-label", 'token.content']); // Add source code as alt text
 
-                    } catch (e: any) {
+                    } catch (e) {
                         console.log(`Error in running Mermaid.mermaidAPI.render: ${e}`);
                         return `<div class="alert alert-warning">${e.str}</div>`;
                     } finally {
