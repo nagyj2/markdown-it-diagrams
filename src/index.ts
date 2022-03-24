@@ -21,11 +21,11 @@ export async function loadPluginFactory() {
 
         // Render custom code types as SVGs, letting the fence parser do all the heavy lifting.
         function customFenceRenderer(tokens: any[], idx: number, options: any, env: any, slf: any) {
-            let token = tokens[idx];
-            let info = token.info.trim();
-            let langName = info ? getLangName(info) : "";
-            let imageHTML: string = "";
-            let imageAttrs: string[][] = [];
+            let token = tokens[idx]; //? The input to render (stored under token.content)
+            let info = token.info.trim(); //? Text which contains the language name
+            let langName = info ? getLangName(info) : ""; // Name of the language we want to render
+            let imageHTML: string = ""; // HTML representing the image
+            let imageAttrs: string[][] = []; // Attributes for the image item
 
             // Only handle custom token
             switch (langName) {
@@ -53,7 +53,12 @@ export async function loadPluginFactory() {
                             // Store HTML
                             imageHTML = html;
                         }, element);
-                    } catch (e) {
+
+                        // Add labelling information to image
+                        imageAttrs.push(["role", 'img']); // Tag element as an image for screen readers
+                        imageAttrs.push(["aria-label", 'token.content']); // Add source code as alt text
+
+                    } catch (e: any) {
                         console.log(`Error in running Mermaid.mermaidAPI.render: ${e}`);
                         return `<div class="alert alert-warning">${e.str}</div>`;
                     } finally {
