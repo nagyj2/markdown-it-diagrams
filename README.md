@@ -1,4 +1,6 @@
 # markdown-it-diagrams
+A modified version to better improve rendering options and screen reader support.
+
 Diagrams renderer for [markdown-it](https://github.com/markdown-it/markdown-it), using [svgbob](https://github.com/ivanceras/svgbob), and [mermaidjs](https://github.com/knsv/mermaid).
 
 Example code
